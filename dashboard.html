@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — Quran NFT — Ramadan 2030</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #e0ddd0; line-height: 1.6; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: #D4A843; margin-bottom: 4px; }
+  .sub { font-size: 13px; color: #7a7560; margin-bottom: 24px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #7a7560; margin-bottom: 4px; }
+  .card-value { font-family: 'Playfair Display', serif; font-size: 28px; color: #E8C547; font-weight: 700; }
+  .card-sub { font-size: 12px; color: #8a8270; margin-top: 2px; }
+
+  .section { margin-bottom: 24px; }
+  .section h2 { font-family: 'Playfair Display', serif; font-size: 20px; color: #D4A843; margin-bottom: 12px; }
+
+  .progress-outer { width: 100%; height: 12px; background: rgba(255,255,255,0.06); border-radius: 6px; overflow: hidden; margin: 8px 0; }
+  .progress-inner { height: 100%; background: linear-gradient(90deg, #8B6914, #D4A843, #E8C547); border-radius: 6px; transition: width 1s; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7a7560; padding: 8px; border-bottom: 1px solid rgba(212,168,67,0.15); }
+  td { padding: 8px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  td a { color: #E8C547; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; color: #fff; }
+  .badge-active { background: #16A34A; }
+  .badge-inactive { background: #DC2626; }
+  .badge-yes { background: #16A34A; }
+  .badge-no { background: #64748B; }
+
+  .refresh-btn {
+    font-size: 13px; color: #D4A843; background: rgba(212,168,67,0.1);
+    border: 1px solid rgba(212,168,67,0.3); padding: 8px 16px;
+    border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  }
+  .refresh-btn:hover { background: rgba(212,168,67,0.2); }
+
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+  .status-dot.live { background: #16A34A; animation: pulse 2s infinite; }
+  .status-dot.off { background: #DC2626; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  .loading { color: #7a7560; font-style: italic; }
+
+  #recentMints td:first-child { font-family: monospace; font-size: 12px; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .container { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-bar">
+    <div>
+      <h1>QURAN2030 Dashboard</h1>
+      <div class="sub">Real-time collection monitor — Base Mainnet</div>
+    </div>
+    <div>
+      <button class="refresh-btn" onclick="refreshAll()">Refresh</button>
+      <a href="mint.html" class="refresh-btn" style="text-decoration:none;margin-left:8px">Mint Page</a>
+    </div>
+  </div>
+
+  <!-- Key metrics -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Minted</div>
+      <div class="card-value" id="minted">--</div>
+      <div class="card-sub">of 6,236 total</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Mint Status</div>
+      <div class="card-value" id="mintStatus"><span class="loading">...</span></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Contract Balance</div>
+      <div class="card-value" id="contractBalance">--</div>
+      <div class="card-sub">ETH</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Sadaqah Pool</div>
+      <div class="card-value" id="sadaqahBalance">--</div>
+      <div class="card-sub">ETH</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Surahs Init</div>
+      <div class="card-value" id="surahsInit"><span class="loading">...</span></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Musabaqah</div>
+      <div class="card-value" id="musabaqah"><span class="loading">...</span></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Owner Balance</div>
+      <div class="card-value" id="ownerBalance">--</div>
+      <div class="card-sub">ETH</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Mint Revenue</div>
+      <div class="card-value" id="mintRevenue">--</div>
+      <div class="card-sub">ETH (est.)</div>
+    </div>
+  </div>
+
+  <!-- Supply progress -->
+  <div class="section">
+    <h2>Supply Progress</h2>
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:#8a8270">
+      <span><strong id="pctMinted">0</strong>% minted</span>
+      <span><strong id="remainingCount">6,236</strong> remaining</span>
+    </div>
+    <div class="progress-outer">
+      <div class="progress-inner" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Recent mints -->
+  <div class="section">
+    <h2>Recent Mints</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tx Hash</th>
+          <th>Minter</th>
+          <th>Qty</th>
+          <th>Block</th>
+        </tr>
+      </thead>
+      <tbody id="recentMints">
+        <tr><td colspan="4" class="loading">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Contract info -->
+  <div class="section">
+    <h2>Contract Info</h2>
+    <table>
+      <tr><td style="color:#7a7560;width:180px">Contract</td><td><a id="contractLink" href="#" target="_blank">--</a></td></tr>
+      <tr><td style="color:#7a7560">Owner</td><td><a id="ownerLink" href="#" target="_blank">--</a></td></tr>
+      <tr><td style="color:#7a7560">Creator Address</td><td id="creatorAddr">--</td></tr>
+      <tr><td style="color:#7a7560">Sadaqah Pool</td><td id="sadaqahAddr">--</td></tr>
+      <tr><td style="color:#7a7560">Mint Price</td><td id="mintPrice">--</td></tr>
+      <tr><td style="color:#7a7560">Max Per TX</td><td id="maxPerTx">--</td></tr>
+      <tr><td style="color:#7a7560">Chain</td><td>Base (8453)</td></tr>
+      <tr><td style="color:#7a7560">Standard</td><td>ERC-404</td></tr>
+    </table>
+  </div>
+
+  <div style="text-align:center;padding:20px;font-size:11px;color:#4a4840">
+    Auto-refreshes every 30 seconds &nbsp;|&nbsp; <span id="lastUpdate">--</span>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script>
+const CONTRACT_ADDRESS = "0x183e1A9baafAbfAA53F8B40F4c1527102bb28299";
+const OWNER_ADDRESS = "0x4ad313f3C7e08707F163BAe7EaBF990039e61057";
+const BASE_RPC = "https://mainnet.base.org";
+const BASESCAN = "https://basescan.org";
+const TOTAL = 6236;
+
+const ABI = [
+  "function publicMinted() view returns (uint256)",
+  "function minted() view returns (uint256)",
+  "function mintActive() view returns (bool)",
+  "function surahsInitialized() view returns (bool)",
+  "function musabaqahCompleted() view returns (bool)",
+  "function sadaqahBalance() view returns (uint256)",
+  "function creatorAddress() view returns (address)",
+  "function sadaqahPool() view returns (address)",
+  "function owner() view returns (address)",
+  "function MINT_PRICE() view returns (uint256)",
+  "function MAX_PER_TX() view returns (uint256)",
+  "event Minted(address indexed minter, uint256 quantity)"
+];
+
+const provider = new ethers.providers.JsonRpcProvider(BASE_RPC);
+const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
+
+function short(addr) {
+  return addr.slice(0, 6) + '...' + addr.slice(-4);
+}
+
+async function refreshAll() {
+  // Update static contract info immediately
+  document.getElementById('contractLink').href = BASESCAN + '/address/' + CONTRACT_ADDRESS;
+  document.getElementById('contractLink').textContent = short(CONTRACT_ADDRESS);
+
+  // Fetch each field independently - no Promise.all so one failure can't break others
+  var minted = 0;
+  try { minted = Number(await contract.publicMinted()); }
+  catch { try { minted = Number(await contract.minted()); } catch {} }
+  var pct = ((minted / TOTAL) * 100).toFixed(1);
+  document.getElementById('minted').textContent = minted.toLocaleString();
+  document.getElementById('pctMinted').textContent = pct;
+  document.getElementById('remainingCount').textContent = (TOTAL - minted).toLocaleString();
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('mintRevenue').textContent = (minted * 0.03).toFixed(2);
+
+  try {
+    var mintActive = await contract.mintActive();
+    document.getElementById('mintStatus').innerHTML = mintActive
+      ? '<span class="status-dot live"></span><span class="badge badge-active">ACTIVE</span>'
+      : '<span class="status-dot off"></span><span class="badge badge-inactive">PAUSED</span>';
+  } catch { document.getElementById('mintStatus').innerHTML = '<span class="badge badge-inactive">PAUSED</span>'; }
+
+  try {
+    var surahsInit = await contract.surahsInitialized();
+    document.getElementById('surahsInit').innerHTML = surahsInit
+      ? '<span class="badge badge-yes">114/114</span>'
+      : '<span class="badge badge-no">Incomplete</span>';
+  } catch { document.getElementById('surahsInit').innerHTML = '<span class="badge badge-no">Unknown</span>'; }
+
+  try {
+    var musabaqahDone = await contract.musabaqahCompleted();
+    document.getElementById('musabaqah').innerHTML = musabaqahDone
+      ? '<span class="badge badge-yes">Completed</span>'
+      : '<span class="badge badge-no">Dec 2030</span>';
+  } catch { document.getElementById('musabaqah').innerHTML = '<span class="badge badge-no">Dec 2030</span>'; }
+
+  try {
+    var sadaqah = await contract.sadaqahBalance();
+    document.getElementById('sadaqahBalance').textContent = parseFloat(ethers.utils.formatEther(sadaqah)).toFixed(4);
+  } catch { document.getElementById('sadaqahBalance').textContent = '0'; }
+
+  try {
+    var contractBal = await provider.getBalance(CONTRACT_ADDRESS);
+    document.getElementById('contractBalance').textContent = parseFloat(ethers.utils.formatEther(contractBal)).toFixed(4);
+  } catch {}
+
+  try {
+    var ownerBal = await provider.getBalance(OWNER_ADDRESS);
+    document.getElementById('ownerBalance').textContent = parseFloat(ethers.utils.formatEther(ownerBal)).toFixed(6);
+  } catch {}
+
+  try {
+    var ownerAddr = await contract.owner();
+    document.getElementById('ownerLink').href = BASESCAN + '/address/' + ownerAddr;
+    document.getElementById('ownerLink').textContent = short(ownerAddr);
+  } catch {}
+
+  try {
+    var creatorAddr = await contract.creatorAddress();
+    document.getElementById('creatorAddr').textContent = short(creatorAddr);
+  } catch {}
+
+  try {
+    var sadaqahAddr = await contract.sadaqahPool();
+    document.getElementById('sadaqahAddr').textContent = short(sadaqahAddr);
+  } catch {}
+
+  try {
+    var mintPrice = await contract.MINT_PRICE();
+    document.getElementById('mintPrice').textContent = ethers.utils.formatEther(mintPrice) + ' ETH';
+  } catch { document.getElementById('mintPrice').textContent = '0.03 ETH'; }
+
+  try {
+    var maxPerTx = await contract.MAX_PER_TX();
+    document.getElementById('maxPerTx').textContent = Number(maxPerTx);
+  } catch { document.getElementById('maxPerTx').textContent = '20'; }
+
+  try { await loadRecentMints(); } catch {}
+
+  document.getElementById('lastUpdate').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+}
+
+async function loadRecentMints() {
+  try {
+    const currentBlock = await provider.getBlockNumber();
+    const fromBlock = Math.max(0, currentBlock - 10000); // Last ~10K blocks
+    const filter = contract.filters.Minted();
+    const events = await contract.queryFilter(filter, fromBlock, currentBlock);
+
+    const tbody = document.getElementById('recentMints');
+    if (events.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" style="color:#7a7560">No mints yet</td></tr>';
+      return;
+    }
+
+    // Show last 10 mints, newest first
+    const recent = events.slice(-10).reverse();
+    tbody.innerHTML = recent.map(e => {
+      const txHash = e.transactionHash;
+      const minter = e.args.minter;
+      const qty = Number(e.args.quantity);
+      return `<tr>
+        <td><a href="${BASESCAN}/tx/${txHash}" target="_blank">${txHash.slice(0,10)}...</a></td>
+        <td><a href="${BASESCAN}/address/${minter}" target="_blank">${short(minter)}</a></td>
+        <td>${qty}</td>
+        <td>${e.blockNumber}</td>
+      </tr>`;
+    }).join('');
+  } catch (err) {
+    console.warn('Could not load recent mints:', err);
+  }
+}
+
+// Initial load + auto-refresh every 30s
+refreshAll();
+setInterval(refreshAll, 30000);
+</script>
+</body>
+</html>

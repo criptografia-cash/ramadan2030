@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mint — Quran NFT Collection — Ramadan 2030</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #060610;
+      color: #E8E0D0;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ---- Stars background ---- */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #FFD700;
+      border-radius: 50%;
+      animation: twinkle var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      25% {
+        transform: translate(var(--dx), var(--dy));
+      }
+
+      50% {
+        transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 1.5));
+      }
+
+      75% {
+        transform: translate(calc(var(--dx) * 1.2), calc(var(--dy) * -0.8));
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---- Top nav bar ---- */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .top-bar-left a {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: #D4A843;
+      text-decoration: none;
+      border: 1px solid rgba(212, 168, 67, 0.3);
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .top-bar-left a:hover {
+      background: rgba(212, 168, 67, 0.1);
+      border-color: rgba(212, 168, 67, 0.5);
+    }
+
+    .wallet-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #060610;
+      background: linear-gradient(135deg, #D4A843, #E8C547);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .wallet-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+    }
+
+    .wallet-btn.connected {
+      background: rgba(212, 168, 67, 0.12);
+      color: #E8C547;
+      border: 1px solid rgba(212, 168, 67, 0.3);
+    }
+
+    /* ---- Header ---- */
+    .header {
+      text-align: center;
+      padding: 40px 0 30px;
+    }
+
+    .bismillah {
+      font-family: 'Amiri', serif;
+      font-size: 28px;
+      color: #D4A843;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .moon-icon {
+      font-size: 48px;
+      margin: 20px 0;
+      filter: drop-shadow(0 0 20px rgba(212, 168, 67, 0.4));
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #D4A843, #E8C547, #D4A843);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #A09880;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    /* ---- Dividers ---- */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #D4A843, transparent);
+      margin: 40px 0;
+      opacity: 0.4;
+    }
+
+    /* ---- Mint Card ---- */
+    .mint-card {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06), rgba(212, 168, 67, 0.02));
+      border: 2px solid rgba(212, 168, 67, 0.25);
+      border-radius: 20px;
+      padding: 40px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mint-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(212, 168, 67, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .mint-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #F5E6C8;
+      margin-bottom: 6px;
+    }
+
+    .mint-price-label {
+      font-size: 15px;
+      color: #A09880;
+      margin-bottom: 28px;
+    }
+
+    .mint-price-label strong {
+      color: #E8C547;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* Quantity selector */
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 24px 0 16px;
+    }
+
+    .qty-btn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(212, 168, 67, 0.3);
+      background: rgba(212, 168, 67, 0.08);
+      color: #E8C547;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .qty-btn:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .qty-btn:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+
+    .qty-btn:hover {
+      background: rgba(212, 168, 67, 0.2);
+      border-color: rgba(212, 168, 67, 0.5);
+      box-shadow: 0 0 12px rgba(212, 168, 67, 0.15);
+    }
+
+    .qty-btn:active {
+      transform: scale(0.95);
+      background: rgba(212, 168, 67, 0.3);
+    }
+
+    .qty-display {
+      width: 72px;
+      height: 48px;
+      background: rgba(6, 6, 16, 0.8);
+      border-top: 1px solid rgba(212, 168, 67, 0.3);
+      border-bottom: 1px solid rgba(212, 168, 67, 0.3);
+      color: #E8E0D0;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .total-price {
+      font-size: 16px;
+      color: #C0B8A0;
+      margin-bottom: 28px;
+    }
+
+    .total-price span {
+      color: #E8C547;
+      font-weight: 700;
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Mint button */
+    .mint-btn {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #060610;
+      background: linear-gradient(135deg, #D4A843, #E8C547, #D4A843);
+      background-size: 200% 200%;
+      border: none;
+      padding: 16px 64px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mint-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .mint-btn:hover::after {
+      transform: translateX(100%);
+    }
+
+    .mint-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(212, 168, 67, 0.5);
+      background-position: right center;
+    }
+
+    .mint-btn:active {
+      transform: translateY(0);
+    }
+
+    .mint-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .mint-btn:disabled::after {
+      display: none;
+    }
+
+    .mint-btn.minting {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
+    /* Supply progress */
+    .supply-section {
+      margin-top: 32px;
+    }
+
+    .supply-text {
+      font-size: 14px;
+      color: #A09880;
+      margin-bottom: 10px;
+    }
+
+    .supply-text strong {
+      color: #E8C547;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+    }
+
+    .progress-bar-outer {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      background: linear-gradient(90deg, #8B6914, #D4A843, #E8C547);
+      border-radius: 5px;
+      transition: width 1s ease;
+      width: 0%;
+      position: relative;
+    }
+
+    .progress-bar-inner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Status messages */
+    .status-area {
+      margin-top: 20px;
+      min-height: 24px;
+    }
+
+    .status-msg {
+      font-size: 14px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .status-msg.visible {
+      display: block;
+    }
+
+    .status-msg.pending {
+      background: rgba(232, 197, 71, 0.08);
+      border: 1px solid rgba(232, 197, 71, 0.2);
+      color: #E8C547;
+    }
+
+    .status-msg.success {
+      background: rgba(46, 204, 113, 0.08);
+      border: 1px solid rgba(46, 204, 113, 0.2);
+      color: #4AE88A;
+    }
+
+    .status-msg.error {
+      background: rgba(231, 76, 60, 0.08);
+      border: 1px solid rgba(231, 76, 60, 0.2);
+      color: #E74C3C;
+    }
+
+    .status-msg a {
+      color: #E8C547;
+      text-decoration: underline;
+    }
+
+    /* Mint inactive banner */
+    .mint-inactive-banner {
+      background: rgba(231, 76, 60, 0.08);
+      border: 1px solid rgba(231, 76, 60, 0.2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #E74C3C;
+      display: none;
+    }
+
+    .mint-inactive-banner.visible {
+      display: block;
+    }
+
+    /* Your balance */
+    .your-balance {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #8A8270;
+      display: none;
+    }
+
+    .your-balance.visible {
+      display: block;
+    }
+
+    .your-balance strong {
+      color: #D4A843;
+    }
+
+    /* ---- Stats grid ---- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 30px 0;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 168, 67, 0.15);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #E8C547;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #8A8270;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    /* ---- Section headings ---- */
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: #F5E6C8;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: #D4A843;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #B0A890;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    /* ---- Rarity table ---- */
+    .rarity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    .rarity-table th {
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #8A8270;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(212, 168, 67, 0.15);
+    }
+
+    .rarity-table td {
+      padding: 10px 12px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .rarity-badge {
+      display: inline-block;
+      padding: 3px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .rarity-legendary {
+      background: #B8860B;
+    }
+
+    .rarity-epic {
+      background: #7C3AED;
+    }
+
+    .rarity-rare {
+      background: #2563EB;
+    }
+
+    .rarity-uncommon {
+      background: #16A34A;
+    }
+
+    .rarity-common {
+      background: #64748B;
+    }
+
+    /* ---- Collection description card ---- */
+    .collection-desc {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.08), rgba(212, 168, 67, 0.03));
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin: 30px 0;
+    }
+
+    .collection-desc h2 {
+      font-size: 22px;
+      color: #E8C547;
+      margin-bottom: 10px;
+    }
+
+    .collection-desc p {
+      color: #C0B8A0;
+      font-size: 15px;
+    }
+
+    /* ---- ERC-404 badge ---- */
+    .erc404-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      padding: 6px 16px;
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      border-radius: 20px;
+      font-size: 11px;
+      color: #8A8270;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .erc404-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: #D4A843;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 6px rgba(212, 168, 67, 0.6);
+      }
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    .footer .bismillah {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: #6A6250;
+    }
+
+    .ramadan-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 36px;
+      color: #D4A843;
+      margin: 16px 0;
+      filter: drop-shadow(0 0 12px rgba(212, 168, 67, 0.3));
+    }
+
+    .contract-address {
+      font-family: monospace;
+      font-size: 12px;
+      color: #6A6250;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 600px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .container {
+        padding: 20px 16px;
+      }
+
+      .mint-card {
+        padding: 28px 20px;
+      }
+
+      .mint-btn {
+        padding: 14px 40px;
+        font-size: 18px;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .qty-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .qty-display {
+        width: 60px;
+        height: 44px;
+      }
+    }
+
+    /* ---- Animations ---- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .fade-in-delay-1 {
+      animation-delay: 0.1s;
+      opacity: 0;
+    }
+
+    .fade-in-delay-2 {
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .fade-in-delay-3 {
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(232, 197, 71, 0.3);
+      border-top-color: #E8C547;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated stars background -->
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+
+    <!-- Top bar with wallet -->
+    <div class="top-bar fade-in">
+      <div class="top-bar-left">
+        <a href="pitch.html">View Collection Info</a>
+      </div>
+      <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header fade-in fade-in-delay-1">
+      <div class="bismillah">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616;
+        &#1649;&#1604;&#1604;&#1617;&#1614;&#1607;&#1616;
+        &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1648;&#1606;&#1616;
+        &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</div>
+      <div class="moon-icon">&#9768;</div>
+      <h1>Quran NFT Collection</h1>
+      <div class="subtitle">RAMADAN 2030 EDITION</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== MINT SECTION ====== -->
+    <div class="mint-card fade-in fade-in-delay-2" id="mintCard">
+
+      <h2>Mint Your Quran NFT</h2>
+      <div class="mint-price-label">Price per NFT: <strong>0.03 ETH</strong></div>
+
+      <div class="mint-inactive-banner" id="mintInactiveBanner">
+        Minting is not currently active. Please check back later.
+      </div>
+
+      <p style="font-size:13px;color:#A09880;margin-bottom:20px;line-height:1.6">
+        Each mint reveals a Surah from the Holy Quran — your rarity is determined by destiny. Fewer verses means higher
+        rarity. Will you receive a Legendary 3-verse Surah or a Common 200+ verse chapter?
+      </p>
+
+      <!-- Quantity selector -->
+      <div class="quantity-selector">
+        <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">&#8722;</button>
+        <div class="qty-display" id="qtyDisplay">1</div>
+        <button class="qty-btn" id="qtyPlus" onclick="changeQty(1)">+</button>
+      </div>
+
+      <div class="total-price">
+        Total: <span id="totalPrice">0.03 ETH</span>
+      </div>
+
+      <!-- Mint button -->
+      <button class="mint-btn" id="mintBtn" onclick="mintNFT()" disabled>MINT</button>
+
+      <!-- Supply counter -->
+      <div class="supply-section">
+        <div class="supply-text">
+          <strong id="mintedCount">0</strong> / <strong>6,236</strong> Minted
+        </div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Your balance -->
+      <div class="your-balance" id="yourBalance">
+        Your balance: <strong id="balanceCount">0</strong> QURAN2030 NFTs
+      </div>
+
+      <!-- Status messages -->
+      <div class="status-area">
+        <div class="status-msg" id="statusMsg"></div>
+      </div>
+
+      <!-- ERC-404 badge -->
+      <div class="erc404-badge">
+        <span class="dot"></span>
+        Powered by ERC-404
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ====== COLLECTION INFO ====== -->
+    <div class="collection-desc fade-in fade-in-delay-3">
+      <h2>About the Collection</h2>
+      <p>The Quran NFT Collection immortalizes the 114 Surahs of the Holy Quran on the Base blockchain. Each Surah
+        becomes a unique, beautifully animated NFT featuring Islamic geometric patterns, Arabic calligraphy, and the
+        full recitation by Imam Abdul Basit Abdul Samad. Supply per Surah equals the number of its verses -- the Quran
+        itself determines rarity.</p>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">6,236</div>
+        <div class="stat-label">Total NFTs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">114</div>
+        <div class="stat-label">Surahs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0.03</div>
+        <div class="stat-label">ETH Price</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">10%</div>
+        <div class="stat-label">Community Share</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Rarity tiers -->
+    <h2>Rarity Tiers</h2>
+    <p>Fewer verses = fewer NFTs = higher rarity. The Quran's natural structure creates the perfect collectible system.
+    </p>
+
+    <table class="rarity-table">
+      <tr>
+        <th>Tier</th>
+        <th>Verses</th>
+        <th>Surahs</th>
+        <th>NFTs</th>
+        <th>% Supply</th>
+      </tr>
+      <tr>
+        <td><span class="rarity-badge rarity-legendary">Legendary</span></td>
+        <td>3-5</td>
+        <td>9</td>
+        <td>37</td>
+        <td style="color:#FFD700;font-weight:600">0.6%</td>
+      </tr>
+      <tr>
+        <td><span class="rarity-badge rarity-epic">Epic</span></td>
+        <td>6-11</td>
+        <td>15</td>
+        <td>130</td>
+        <td>2.1%</td>
+      </tr>
+      <tr>
+        <td><span class="rarity-badge rarity-rare">Rare</span></td>
+        <td>12-30</td>
+        <td>27</td>
+        <td>589</td>
+        <td>9.4%</td>
+      </tr>
+      <tr>
+        <td><span class="rarity-badge rarity-uncommon">Uncommon</span></td>
+        <td>31-100</td>
+        <td>45</td>
+        <td>2,732</td>
+        <td>43.8%</td>
+      </tr>
+      <tr>
+        <td><span class="rarity-badge rarity-common">Common</span></td>
+        <td>101+</td>
+        <td>18</td>
+        <td>2,748</td>
+        <td>44.1%</td>
+      </tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <!-- ====== FOOTER ====== -->
+    <div class="footer">
+      <div class="bismillah">&#1576;&#1616;&#1587;&#1618;&#1605;&#1616;
+        &#1649;&#1604;&#1604;&#1617;&#1614;&#1607;&#1616;
+        &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1648;&#1606;&#1616;
+        &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</div>
+      <div class="ramadan-arabic">&#1585;&#1605;&#1590;&#1575;&#1606; &#1634;&#1632;&#1635;&#1632;</div>
+      <p style="font-size:16px;color:#D4A843;margin-bottom:8px">Ramadan Mubarak</p>
+      <p>QURAN NFT COLLECTION -- 6,236 NFTs -- 114 SURAHS</p>
+      <div class="contract-address" id="contractAddrFooter">
+        Contract: <span id="footerAddr">0x183e1A9baafAbfAA53F8B40F4c1527102bb28299</span>
+      </div>
+      <p style="margin-top:16px;font-size:12px">Symbol: QURAN2030 &nbsp;|&nbsp; Standard: ERC-404 &nbsp;|&nbsp; Chain:
+        Base</p>
+    </div>
+
+  </div>
+
+  <!-- ethers.js v6 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+  <script>
+// =====================================================
+// CONFIGURATION - Update after deployment
+// =====================================================
+const CONTRACT_ADDRESS = "0x183e1A9baafAbfAA53F8B40F4c1527102bb28299";
+const EXPECTED_CHAIN_ID = 8453; // Base Mainnet
+const ETHERSCAN_BASE = "https://basescan.org";
+
+// Contract ABI (minimal)
+const CONTRACT_ABI = [
+  "function mint(uint256 quantity) external payable",
+  "function publicMinted() public view returns (uint256)",
+  "function mintActive() public view returns (bool)",
+  "function MINT_PRICE() public view returns (uint256)",
+  "function MAX_PER_TX() public view returns (uint256)",
+  "function balanceOf(address) public view returns (uint256)",
+  "function totalSupply() public view returns (uint256)"
+];
+
+const TOTAL_NFTS = 6236;
+const DEFAULT_MINT_PRICE = 0.03; // ETH fallback
+
+// =====================================================
+// STATE
+// =====================================================
+let provider = null;
+let signer = null;
+let contract = null;
+let userAddress = null;
+let quantity = 1;
+let mintPrice = null; // will be fetched from contract
+let isMinting = false;
+
+// =====================================================
+// STARS BACKGROUND
+// =====================================================
+(function() {
+  var c = document.getElementById('stars');
+  for (var i = 0; i < 120; i++) {
+    var s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
+    s.style.setProperty('--delay', (Math.random() * 4) + 's');
+    s.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
+    s.style.setProperty('--dy', (Math.random() * 40 - 20) + 'px');
+    s.style.animation = 'twinkle var(--dur) ease-in-out infinite var(--delay), drift ' + (Math.random() * 20 + 15) + 's ease-in-out infinite ' + (Math.random() * 5) + 's';
+    s.style.width = s.style.height = (Math.random() * 2 + 1) + 'px';
+    c.appendChild(s);
+  }
+})();
+
+// =====================================================
+// WALLET CONNECTION
+// =====================================================
+async function connectWallet() {
+  if (userAddress) {
+    // Already connected - disconnect
+    disconnectWallet();
+    return;
+  }
+
+  if (typeof window.ethereum === 'undefined') {
+    showStatus('error', 'MetaMask not detected. Please install MetaMask to mint.');
+    return;
+  }
+
+  try {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // Check chain
+    const network = await provider.getNetwork();
+    if (network.chainId !== EXPECTED_CHAIN_ID) {
+      showStatus('pending', 'Switching to Base network...');
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x' + EXPECTED_CHAIN_ID.toString(16) }]
+        });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+      } catch (switchError) {
+        // If chain not added, add it
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: '0x' + EXPECTED_CHAIN_ID.toString(16),
+              chainName: 'Base',
+              nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+              rpcUrls: ['https://mainnet.base.org'],
+              blockExplorerUrls: ['https://basescan.org']
+            }]
+          });
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+        } catch (addError) {
+          showStatus('error', 'Please add and switch to Base network in your wallet.');
+          return;
+        }
+      }
+    }
+
+    // Request accounts
+    await provider.send("eth_requestAccounts", []);
+    signer = provider.getSigner();
+    userAddress = await signer.getAddress();
+
+    // Initialize contract
+    contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+
+    // Update UI
+    const truncated = userAddress.slice(0, 6) + '...' + userAddress.slice(-4);
+    const walletBtn = document.getElementById('walletBtn');
+    walletBtn.textContent = truncated;
+    walletBtn.classList.add('connected');
+
+    document.getElementById('mintBtn').disabled = false;
+
+    hideStatus();
+
+    // Fetch on-chain data
+    await refreshContractData();
+
+  } catch (err) {
+    console.error('Connection error:', err);
+    if (err.code === 4001) {
+      showStatus('error', 'Connection rejected. Please try again.');
+    } else {
+      showStatus('error', 'Failed to connect wallet. ' + (err.message || ''));
+    }
+  }
+}
+
+function disconnectWallet() {
+  provider = null;
+  signer = null;
+  contract = null;
+  userAddress = null;
+
+  const walletBtn = document.getElementById('walletBtn');
+  walletBtn.textContent = 'Connect Wallet';
+  walletBtn.classList.remove('connected');
+
+  document.getElementById('mintBtn').disabled = true;
+  document.getElementById('yourBalance').classList.remove('visible');
+  hideStatus();
+}
+
+// =====================================================
+// CONTRACT DATA
+// =====================================================
+async function refreshContractData() {
+  if (!contract) return;
+
+  try {
+    // Fetch minted count
+    let mintedCount = 0;
+    try {
+      mintedCount = Number(await contract.publicMinted());
+    } catch (e) {
+      // Fallback to totalSupply if minted() not available
+      try {
+        mintedCount = Number(await contract.totalSupply());
+      } catch (e2) {
+        console.warn('Could not fetch supply count');
+      }
+    }
+    updateSupplyDisplay(mintedCount);
+
+    // Fetch mint price
+    try {
+      const price = await contract.MINT_PRICE();
+      mintPrice = price;
+      updateTotalPrice();
+    } catch (e) {
+      console.warn('Using default mint price');
+      mintPrice = ethers.utils.parseEther(DEFAULT_MINT_PRICE.toString());
+      updateTotalPrice();
+    }
+
+    // Fetch mint active status
+    try {
+      const active = await contract.mintActive();
+      if (!active) {
+        document.getElementById('mintInactiveBanner').classList.add('visible');
+        document.getElementById('mintBtn').disabled = true;
+      } else {
+        document.getElementById('mintInactiveBanner').classList.remove('visible');
+        if (userAddress) document.getElementById('mintBtn').disabled = false;
+      }
+    } catch (e) {
+      console.warn('Could not check mint status');
+    }
+
+    // Fetch user balance
+    if (userAddress) {
+      try {
+        const balanceWei = await contract.balanceOf(userAddress);
+        const nftCount = balanceWei.div(ethers.constants.WeiPerEther).toNumber();
+        document.getElementById('balanceCount').textContent = nftCount;
+        document.getElementById('yourBalance').classList.add('visible');
+      } catch (e) {
+        console.warn('Could not fetch balance');
+      }
+    }
+
+  } catch (err) {
+    console.warn('Error fetching contract data:', err);
+  }
+}
+
+function updateSupplyDisplay(minted) {
+  document.getElementById('mintedCount').textContent = minted.toLocaleString();
+  const pct = (minted / TOTAL_NFTS) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// =====================================================
+// QUANTITY CONTROLS
+// =====================================================
+function changeQty(delta) {
+  quantity = Math.min(20, Math.max(1, quantity + delta));
+  document.getElementById('qtyDisplay').textContent = quantity;
+  updateTotalPrice();
+}
+
+function updateTotalPrice() {
+  let priceEth;
+  if (mintPrice) {
+    priceEth = parseFloat(ethers.utils.formatEther(mintPrice));
+  } else {
+    priceEth = DEFAULT_MINT_PRICE;
+  }
+  const total = (priceEth * quantity).toFixed(4).replace(/\.?0+$/, '');
+  document.getElementById('totalPrice').textContent = total + ' ETH';
+}
+
+// =====================================================
+// MINTING
+// =====================================================
+async function mintNFT() {
+  if (!contract || !signer || isMinting) return;
+
+  isMinting = true;
+  const mintBtn = document.getElementById('mintBtn');
+  mintBtn.classList.add('minting');
+  mintBtn.disabled = true;
+  mintBtn.innerHTML = '<span class="spinner"></span>Minting...';
+
+  try {
+    // Calculate total value
+    let value;
+    if (mintPrice) {
+      value = mintPrice.mul(quantity);
+    } else {
+      value = ethers.utils.parseEther((DEFAULT_MINT_PRICE * quantity).toString());
+    }
+
+    showStatus('pending', '<span class="spinner"></span> Waiting for transaction approval...');
+
+    // Send mint transaction
+    const tx = await contract.mint(quantity, { value: value });
+
+    showStatus('pending', '<span class="spinner"></span> Transaction submitted. Waiting for confirmation...<br><a href="' + ETHERSCAN_BASE + '/tx/' + tx.hash + '" target="_blank" rel="noopener">View on Etherscan</a>');
+
+    // Wait for confirmation
+    const receipt = await tx.wait();
+
+    showStatus('success', 'Successfully minted ' + quantity + ' NFT' + (quantity > 1 ? 's' : '') + '!<br><a href="' + ETHERSCAN_BASE + '/tx/' + receipt.hash + '" target="_blank" rel="noopener">View transaction on Etherscan</a>');
+
+    // Refresh data
+    await refreshContractData();
+
+  } catch (err) {
+    console.error('Mint error:', err);
+
+    if (err.code === 'ACTION_REJECTED' || err.code === 4001) {
+      showStatus('error', 'Transaction was rejected.');
+    } else if (err.message && err.message.includes('insufficient funds')) {
+      showStatus('error', 'Insufficient ETH balance for this transaction.');
+    } else if (err.message && err.message.includes('Mint not active')) {
+      showStatus('error', 'Minting is not currently active.');
+    } else if (err.message && err.message.includes('Exceeds max')) {
+      showStatus('error', 'Quantity exceeds maximum per transaction.');
+    } else if (err.message && err.message.includes('Sold out')) {
+      showStatus('error', 'Collection is sold out!');
+    } else {
+      let reason = err.reason || err.message || 'Unknown error occurred.';
+      if (err.data && err.data.message) reason = err.data.message;
+      if (err.error && err.error.message) reason = err.error.message;
+      
+      // Specifically handle the JSON-RPC error with more detail
+      if (reason.includes("Internal JSON-RPC error")) {
+        reason += " (This usually means the contract reverted or you have insufficient funds)";
+      }
+      
+      showStatus('error', 'Mint failed: ' + reason);
+    }
+  } finally {
+    isMinting = false;
+    mintBtn.classList.remove('minting');
+    mintBtn.innerHTML = 'MINT';
+    if (userAddress) mintBtn.disabled = false;
+  }
+}
+
+// =====================================================
+// STATUS MESSAGES
+// =====================================================
+function showStatus(type, message) {
+  const el = document.getElementById('statusMsg');
+  el.className = 'status-msg visible ' + type;
+  el.innerHTML = message;
+}
+
+function hideStatus() {
+  const el = document.getElementById('statusMsg');
+  el.className = 'status-msg';
+  el.innerHTML = '';
+}
+
+// =====================================================
+// ACCOUNT & CHAIN CHANGE LISTENERS
+// =====================================================
+if (typeof window.ethereum !== 'undefined') {
+  window.ethereum.on('accountsChanged', function(accounts) {
+    if (accounts.length === 0) {
+      disconnectWallet();
+    } else {
+      // Reconnect with new account
+      disconnectWallet();
+      connectWallet();
+    }
+  });
+
+  window.ethereum.on('chainChanged', function() {
+    // Reload on chain change
+    window.location.reload();
+  });
+}
+
+// Initialize total price display
+updateTotalPrice();
+  </script>
+</body>
+
+</html>
