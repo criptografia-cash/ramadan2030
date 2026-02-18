@@ -779,6 +779,16 @@
         <a href="pitch.html">View Collection Info</a>
       </div>
       <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
+      <script>
+        // On mobile without injected wallet, show open-in-MetaMask button
+        if (/Mobi|Android|iPhone/i.test(navigator.userAgent) && !window.ethereum) {
+          const btn = document.createElement('a');
+          btn.href = 'https://metamask.app.link/dapp/criptografia-cash.github.io/ramadan2030/';
+          btn.textContent = '📱 Open in MetaMask';
+          btn.style = 'display:block;margin-top:8px;font-size:12px;color:#D4A843;text-align:right;text-decoration:none;';
+          document.getElementById('walletBtn').insertAdjacentElement('afterend', btn);
+        }
+      </script>
     </div>
 
     <!-- Header -->
