@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mint — Quran NFT Collection — Ramadan 2030</title>
+  <title>Mint — Quran NFT Collection — Ramadan 2030</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -44,37 +44,16 @@
     }
 
     @keyframes twinkle {
-
-      0%,
-      100% {
-        opacity: 0.2;
-      }
-
-      50% {
-        opacity: 0.8;
-      }
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.8; }
     }
 
     @keyframes drift {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      25% {
-        transform: translate(var(--dx), var(--dy));
-      }
-
-      50% {
-        transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 1.5));
-      }
-
-      75% {
-        transform: translate(calc(var(--dx) * 1.2), calc(var(--dy) * -0.8));
-      }
-
-      100% {
-        transform: translate(0, 0);
-      }
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(var(--dx), var(--dy)); }
+      50% { transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 1.5)); }
+      75% { transform: translate(calc(var(--dx) * 1.2), calc(var(--dy) * -0.8)); }
+      100% { transform: translate(0, 0); }
     }
 
     .container {
@@ -91,6 +70,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 0;
+      gap: 10px;
     }
 
     .top-bar-left a {
@@ -105,6 +85,26 @@
     }
 
     .top-bar-left a:hover {
+      background: rgba(212, 168, 67, 0.1);
+      border-color: rgba(212, 168, 67, 0.5);
+    }
+
+    .lang-toggle {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #D4A843;
+      background: transparent;
+      border: 1px solid rgba(212, 168, 67, 0.3);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .lang-toggle:hover {
       background: rgba(212, 168, 67, 0.1);
       border-color: rgba(212, 168, 67, 0.5);
     }
@@ -324,9 +324,7 @@
       transition: transform 0.6s ease;
     }
 
-    .mint-btn:hover::after {
-      transform: translateX(100%);
-    }
+    .mint-btn:hover::after { transform: translateX(100%); }
 
     .mint-btn:hover {
       transform: translateY(-2px);
@@ -334,9 +332,7 @@
       background-position: right center;
     }
 
-    .mint-btn:active {
-      transform: translateY(0);
-    }
+    .mint-btn:active { transform: translateY(0); }
 
     .mint-btn:disabled {
       opacity: 0.4;
@@ -345,9 +341,7 @@
       box-shadow: none;
     }
 
-    .mint-btn:disabled::after {
-      display: none;
-    }
+    .mint-btn:disabled::after { display: none; }
 
     .mint-btn.minting {
       opacity: 0.7;
@@ -355,9 +349,7 @@
     }
 
     /* Supply progress */
-    .supply-section {
-      margin-top: 32px;
-    }
+    .supply-section { margin-top: 32px; }
 
     .supply-text {
       font-size: 14px;
@@ -392,29 +384,18 @@
     .progress-bar-inner::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       animation: shimmer 2s ease-in-out infinite;
     }
 
     @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-
-      100% {
-        transform: translateX(100%);
-      }
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     /* Status messages */
-    .status-area {
-      margin-top: 20px;
-      min-height: 24px;
-    }
+    .status-area { margin-top: 20px; min-height: 24px; }
 
     .status-msg {
       font-size: 14px;
@@ -423,9 +404,7 @@
       display: none;
     }
 
-    .status-msg.visible {
-      display: block;
-    }
+    .status-msg.visible { display: block; }
 
     .status-msg.pending {
       background: rgba(232, 197, 71, 0.08);
@@ -445,10 +424,7 @@
       color: #E74C3C;
     }
 
-    .status-msg a {
-      color: #E8C547;
-      text-decoration: underline;
-    }
+    .status-msg a { color: #E8C547; text-decoration: underline; }
 
     /* Mint inactive banner */
     .mint-inactive-banner {
@@ -462,25 +438,12 @@
       display: none;
     }
 
-    .mint-inactive-banner.visible {
-      display: block;
-    }
+    .mint-inactive-banner.visible { display: block; }
 
     /* Your balance */
-    .your-balance {
-      margin-top: 14px;
-      font-size: 13px;
-      color: #8A8270;
-      display: none;
-    }
-
-    .your-balance.visible {
-      display: block;
-    }
-
-    .your-balance strong {
-      color: #D4A843;
-    }
+    .your-balance { margin-top: 14px; font-size: 13px; color: #8A8270; display: none; }
+    .your-balance.visible { display: block; }
+    .your-balance strong { color: #D4A843; }
 
     /* ---- Stats grid ---- */
     .stats {
@@ -514,32 +477,12 @@
     }
 
     /* ---- Section headings ---- */
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      color: #F5E6C8;
-      margin-bottom: 16px;
-    }
-
-    h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: #D4A843;
-      margin-bottom: 8px;
-    }
-
-    p {
-      color: #B0A890;
-      font-size: 15px;
-      margin-bottom: 14px;
-    }
+    h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: #F5E6C8; margin-bottom: 16px; }
+    h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: #D4A843; margin-bottom: 8px; }
+    p { color: #B0A890; font-size: 15px; margin-bottom: 14px; }
 
     /* ---- Rarity table ---- */
-    .rarity-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-    }
+    .rarity-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
 
     .rarity-table th {
       text-align: left;
@@ -566,25 +509,11 @@
       color: #fff;
     }
 
-    .rarity-legendary {
-      background: #B8860B;
-    }
-
-    .rarity-epic {
-      background: #7C3AED;
-    }
-
-    .rarity-rare {
-      background: #2563EB;
-    }
-
-    .rarity-uncommon {
-      background: #16A34A;
-    }
-
-    .rarity-common {
-      background: #64748B;
-    }
+    .rarity-legendary { background: #B8860B; }
+    .rarity-epic      { background: #7C3AED; }
+    .rarity-rare      { background: #2563EB; }
+    .rarity-uncommon  { background: #16A34A; }
+    .rarity-common    { background: #64748B; }
 
     /* ---- Collection description card ---- */
     .collection-desc {
@@ -595,16 +524,8 @@
       margin: 30px 0;
     }
 
-    .collection-desc h2 {
-      font-size: 22px;
-      color: #E8C547;
-      margin-bottom: 10px;
-    }
-
-    .collection-desc p {
-      color: #C0B8A0;
-      font-size: 15px;
-    }
+    .collection-desc h2 { font-size: 22px; color: #E8C547; margin-bottom: 10px; }
+    .collection-desc p { color: #C0B8A0; font-size: 15px; }
 
     /* ---- ERC-404 badge ---- */
     .erc404-badge {
@@ -627,36 +548,18 @@
       background: #D4A843;
       border-radius: 50%;
       animation: pulse-dot 2s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
     @keyframes pulse-dot {
-
-      0%,
-      100% {
-        opacity: 0.4;
-      }
-
-      50% {
-        opacity: 1;
-        box-shadow: 0 0 6px rgba(212, 168, 67, 0.6);
-      }
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; box-shadow: 0 0 6px rgba(212, 168, 67, 0.6); }
     }
 
     /* ---- Footer ---- */
-    .footer {
-      text-align: center;
-      padding: 40px 0 20px;
-    }
-
-    .footer .bismillah {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .footer p {
-      font-size: 13px;
-      color: #6A6250;
-    }
+    .footer { text-align: center; padding: 40px 0 20px; }
+    .footer .bismillah { font-size: 22px; margin-bottom: 12px; }
+    .footer p { font-size: 13px; color: #6A6250; }
 
     .ramadan-arabic {
       font-family: 'Amiri', serif;
@@ -676,74 +579,26 @@
 
     /* ---- Responsive ---- */
     @media (max-width: 600px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      h1 {
-        font-size: 30px;
-      }
-
-      .container {
-        padding: 20px 16px;
-      }
-
-      .mint-card {
-        padding: 28px 20px;
-      }
-
-      .mint-btn {
-        padding: 14px 40px;
-        font-size: 18px;
-      }
-
-      .top-bar {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .qty-btn {
-        width: 44px;
-        height: 44px;
-      }
-
-      .qty-display {
-        width: 60px;
-        height: 44px;
-      }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      h1 { font-size: 30px; }
+      .container { padding: 20px 16px; }
+      .mint-card { padding: 28px 20px; }
+      .mint-btn { padding: 14px 40px; font-size: 18px; }
+      .top-bar { flex-wrap: wrap; gap: 8px; }
+      .qty-btn { width: 44px; height: 44px; }
+      .qty-display { width: 60px; height: 44px; }
     }
 
     /* ---- Animations ---- */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .fade-in {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    .fade-in-delay-1 {
-      animation-delay: 0.1s;
-      opacity: 0;
-    }
-
-    .fade-in-delay-2 {
-      animation-delay: 0.2s;
-      opacity: 0;
-    }
-
-    .fade-in-delay-3 {
-      animation-delay: 0.3s;
-      opacity: 0;
-    }
+    .fade-in { animation: fadeInUp 0.8s ease forwards; }
+    .fade-in-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
 
     /* Spinner */
     .spinner {
@@ -758,10 +613,40 @@
       margin-right: 6px;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- RTL / Arabic overrides ---- */
+    [dir="rtl"] body {
+      font-family: 'Amiri', serif;
+      line-height: 1.9;
+    }
+
+    [dir="rtl"] .wallet-btn,
+    [dir="rtl"] .lang-toggle,
+    [dir="rtl"] .mint-btn,
+    [dir="rtl"] .stat-value,
+    [dir="rtl"] .qty-display,
+    [dir="rtl"] .contract-address {
+      font-family: 'Inter', sans-serif;
+    }
+
+    [dir="rtl"] .spinner {
+      margin-right: 0;
+      margin-left: 6px;
+    }
+
+    [dir="rtl"] .rarity-table th,
+    [dir="rtl"] .rarity-table td {
+      text-align: right;
+    }
+
+    [dir="rtl"] .stat-label {
+      letter-spacing: 0;
+    }
+
+    [dir="rtl"] .erc404-badge {
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
@@ -776,19 +661,10 @@
     <!-- Top bar with wallet -->
     <div class="top-bar fade-in">
       <div class="top-bar-left">
-        <a href="pitch.html">View Collection Info</a>
+        <a href="pitch.html" data-i18n="viewCollInfo">View Collection Info</a>
       </div>
-      <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">Connect Wallet</button>
-      <script>
-        // On mobile without injected wallet, show open-in-MetaMask button
-        if (/Mobi|Android|iPhone/i.test(navigator.userAgent) && !window.ethereum) {
-          const btn = document.createElement('a');
-          btn.href = 'https://metamask.app.link/dapp/criptografia-cash.github.io/ramadan2030/';
-          btn.textContent = '📱 Open in MetaMask';
-          btn.style = 'display:block;margin-top:8px;font-size:12px;color:#D4A843;text-align:right;text-decoration:none;';
-          document.getElementById('walletBtn').insertAdjacentElement('afterend', btn);
-        }
-      </script>
+      <button class="lang-toggle" id="langToggle" onclick="toggleLang()">العربية</button>
+      <button class="wallet-btn" id="walletBtn" onclick="connectWallet()" data-i18n-wallet>Connect Wallet</button>
     </div>
 
     <!-- Header -->
@@ -798,8 +674,8 @@
         &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1648;&#1606;&#1616;
         &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</div>
       <div class="moon-icon">🌙</div>
-      <h1>Quran NFT Collection</h1>
-      <div class="subtitle">RAMADAN 2030 EDITION</div>
+      <h1 data-i18n="title">Quran NFT Collection</h1>
+      <div class="subtitle" data-i18n="subtitle">RAMADAN 2030 EDITION</div>
     </div>
 
     <div class="divider"></div>
@@ -807,14 +683,14 @@
     <!-- ====== MINT SECTION ====== -->
     <div class="mint-card fade-in fade-in-delay-2" id="mintCard">
 
-      <h2>Mint Your Quran NFT</h2>
-      <div class="mint-price-label">Price per NFT: <strong>0.03 ETH</strong></div>
+      <h2 data-i18n="mintHeading">Mint Your Quran NFT</h2>
+      <div class="mint-price-label"><span data-i18n="mintPricePre">Price per NFT:</span> <strong>0.03 ETH</strong></div>
 
-      <div class="mint-inactive-banner" id="mintInactiveBanner">
+      <div class="mint-inactive-banner" id="mintInactiveBanner" data-i18n="mintInactive">
         Minting is not currently active. Please check back later.
       </div>
 
-      <p style="font-size:13px;color:#A09880;margin-bottom:20px;line-height:1.6">
+      <p style="font-size:13px;color:#A09880;margin-bottom:20px;line-height:1.6" data-i18n="mintDesc">
         Each mint reveals a Surah from the Holy Quran — your rarity is determined by destiny. Fewer verses means higher
         rarity. Will you receive a Legendary 3-verse Surah or a Common 200+ verse chapter?
       </p>
@@ -827,16 +703,16 @@
       </div>
 
       <div class="total-price">
-        Total: <span id="totalPrice">0.03 ETH</span>
+        <span data-i18n="totalLabel">Total:</span> <span id="totalPrice">0.03 ETH</span>
       </div>
 
       <!-- Mint button -->
-      <button class="mint-btn" id="mintBtn" onclick="mintNFT()" disabled>MINT</button>
+      <button class="mint-btn" id="mintBtn" onclick="mintNFT()" disabled data-i18n-mint>MINT</button>
 
       <!-- Supply counter -->
       <div class="supply-section">
         <div class="supply-text">
-          <strong id="mintedCount">0</strong> / <strong>6,236</strong> Minted
+          <strong id="mintedCount">0</strong> / <strong>6,236</strong> <span data-i18n="mintedLabel">Minted</span>
         </div>
         <div class="progress-bar-outer">
           <div class="progress-bar-inner" id="progressBar"></div>
@@ -845,7 +721,7 @@
 
       <!-- Your balance -->
       <div class="your-balance" id="yourBalance">
-        Your balance: <strong id="balanceCount">0</strong> QURAN2030 NFTs
+        <span data-i18n="balancePre">Your balance:</span> <strong id="balanceCount">0</strong> QURAN2030 NFTs
       </div>
 
       <!-- Status messages -->
@@ -856,7 +732,7 @@
       <!-- ERC-404 badge -->
       <div class="erc404-badge">
         <span class="dot"></span>
-        Powered by ERC-404
+        <span data-i18n="erc404badge">Powered by ERC-404</span>
       </div>
     </div>
 
@@ -864,8 +740,8 @@
 
     <!-- ====== COLLECTION INFO ====== -->
     <div class="collection-desc fade-in fade-in-delay-3">
-      <h2>About the Collection</h2>
-      <p>The Quran NFT Collection immortalizes the 114 Surahs of the Holy Quran on the Base blockchain. Each Surah
+      <h2 data-i18n="aboutHeading">About the Collection</h2>
+      <p data-i18n="aboutDesc">The Quran NFT Collection immortalizes the 114 Surahs of the Holy Quran on the Base blockchain. Each Surah
         becomes a unique, beautifully animated NFT featuring Islamic geometric patterns, Arabic calligraphy, and the
         full recitation by Imam Abdul Basit Abdul Samad. Supply per Surah equals the number of its verses -- the Quran
         itself determines rarity.</p>
@@ -875,71 +751,56 @@
     <div class="stats">
       <div class="stat">
         <div class="stat-value">6,236</div>
-        <div class="stat-label">Total NFTs</div>
+        <div class="stat-label" data-i18n="statTotalNFTs">Total NFTs</div>
       </div>
       <div class="stat">
         <div class="stat-value">114</div>
-        <div class="stat-label">Surahs</div>
+        <div class="stat-label" data-i18n="statSurahs">Surahs</div>
       </div>
       <div class="stat">
         <div class="stat-value">0.03</div>
-        <div class="stat-label">ETH Price</div>
+        <div class="stat-label" data-i18n="statPrice">ETH Price</div>
       </div>
       <div class="stat">
         <div class="stat-value">10%</div>
-        <div class="stat-label">Community Share</div>
+        <div class="stat-label" data-i18n="statCommunity">Community Share</div>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <!-- Rarity tiers -->
-    <h2>Rarity Tiers</h2>
-    <p>Fewer verses = fewer NFTs = higher rarity. The Quran's natural structure creates the perfect collectible system.
-    </p>
+    <h2 data-i18n="rarityHeading">Rarity Tiers</h2>
+    <p data-i18n="rarityDesc">Fewer verses = fewer NFTs = higher rarity. The Quran's natural structure creates the perfect collectible system.</p>
 
     <table class="rarity-table">
       <tr>
-        <th>Tier</th>
-        <th>Verses</th>
-        <th>Surahs</th>
-        <th>NFTs</th>
-        <th>% Supply</th>
+        <th data-i18n="thTier">Tier</th>
+        <th data-i18n="thVerses">Verses</th>
+        <th data-i18n="thSurahs">Surahs</th>
+        <th data-i18n="thNFTs">NFTs</th>
+        <th data-i18n="thSupply">% Supply</th>
       </tr>
       <tr>
-        <td><span class="rarity-badge rarity-legendary">Legendary</span></td>
-        <td>3-5</td>
-        <td>9</td>
-        <td>37</td>
+        <td><span class="rarity-badge rarity-legendary" data-i18n="tierLegendary">Legendary</span></td>
+        <td>3-5</td><td>9</td><td>37</td>
         <td style="color:#FFD700;font-weight:600">0.6%</td>
       </tr>
       <tr>
-        <td><span class="rarity-badge rarity-epic">Epic</span></td>
-        <td>6-11</td>
-        <td>15</td>
-        <td>130</td>
-        <td>2.1%</td>
+        <td><span class="rarity-badge rarity-epic" data-i18n="tierEpic">Epic</span></td>
+        <td>6-11</td><td>15</td><td>130</td><td>2.1%</td>
       </tr>
       <tr>
-        <td><span class="rarity-badge rarity-rare">Rare</span></td>
-        <td>12-30</td>
-        <td>27</td>
-        <td>589</td>
-        <td>9.4%</td>
+        <td><span class="rarity-badge rarity-rare" data-i18n="tierRare">Rare</span></td>
+        <td>12-30</td><td>27</td><td>589</td><td>9.4%</td>
       </tr>
       <tr>
-        <td><span class="rarity-badge rarity-uncommon">Uncommon</span></td>
-        <td>31-100</td>
-        <td>45</td>
-        <td>2,732</td>
-        <td>43.8%</td>
+        <td><span class="rarity-badge rarity-uncommon" data-i18n="tierUncommon">Uncommon</span></td>
+        <td>31-100</td><td>45</td><td>2,732</td><td>43.8%</td>
       </tr>
       <tr>
-        <td><span class="rarity-badge rarity-common">Common</span></td>
-        <td>101+</td>
-        <td>18</td>
-        <td>2,748</td>
-        <td>44.1%</td>
+        <td><span class="rarity-badge rarity-common" data-i18n="tierCommon">Common</span></td>
+        <td>101+</td><td>18</td><td>2,748</td><td>44.1%</td>
       </tr>
     </table>
 
@@ -952,13 +813,12 @@
         &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1618;&#1605;&#1614;&#1648;&#1606;&#1616;
         &#1649;&#1604;&#1585;&#1617;&#1614;&#1581;&#1616;&#1610;&#1605;&#1616;</div>
       <div class="ramadan-arabic">&#1585;&#1605;&#1590;&#1575;&#1606; &#1634;&#1632;&#1635;&#1632;</div>
-      <p style="font-size:16px;color:#D4A843;margin-bottom:8px">Ramadan Mubarak</p>
-      <p>QURAN NFT COLLECTION -- 6,236 NFTs -- 114 SURAHS</p>
+      <p style="font-size:16px;color:#D4A843;margin-bottom:8px" data-i18n="footerRamadan">Ramadan Mubarak</p>
+      <p data-i18n="footerCollection">QURAN NFT COLLECTION -- 6,236 NFTs -- 114 SURAHS</p>
       <div class="contract-address" id="contractAddrFooter">
-        Contract: <span id="footerAddr">0x183e1A9baafAbfAA53F8B40F4c1527102bb28299</span>
+        Contract: <span id="footerAddr">0x4d06DC6f0792711e93FF7adeE28b1B2c3CedFCAE</span>
       </div>
-      <p style="margin-top:16px;font-size:12px">Symbol: QURAN2030 &nbsp;|&nbsp; Standard: ERC-404 &nbsp;|&nbsp; Chain:
-        Base</p>
+      <p style="margin-top:16px;font-size:12px" data-i18n="footerSymbol">Symbol: QURAN2030 &nbsp;|&nbsp; Standard: ERC-404 &nbsp;|&nbsp; Chain: Base</p>
     </div>
 
   </div>
@@ -968,13 +828,184 @@
 
   <script>
 // =====================================================
-// CONFIGURATION - Update after deployment
+// TRANSLATIONS
 // =====================================================
-const CONTRACT_ADDRESS = "0x183e1A9baafAbfAA53F8B40F4c1527102bb28299";
+const TRANSLATIONS = {
+  en: {
+    viewCollInfo:   'View Collection Info',
+    connectWallet:  'Connect Wallet',
+    title:          'Quran NFT Collection',
+    subtitle:       'RAMADAN 2030 EDITION',
+    mintHeading:    'Mint Your Quran NFT',
+    mintPricePre:   'Price per NFT:',
+    mintInactive:   'Minting is not currently active. Please check back later.',
+    mintDesc:       'Each mint reveals a Surah from the Holy Quran — your rarity is determined by destiny. Fewer verses means higher rarity. Will you receive a Legendary 3-verse Surah or a Common 200+ verse chapter?',
+    totalLabel:     'Total:',
+    mintBtn:        'MINT',
+    mintedLabel:    'Minted',
+    balancePre:     'Your balance:',
+    erc404badge:    'Powered by ERC-404',
+    aboutHeading:   'About the Collection',
+    aboutDesc:      'The Quran NFT Collection immortalizes the 114 Surahs of the Holy Quran on the Base blockchain. Each Surah becomes a unique, beautifully animated NFT featuring Islamic geometric patterns, Arabic calligraphy, and the full recitation by Imam Abdul Basit Abdul Samad. Supply per Surah equals the number of its verses -- the Quran itself determines rarity.',
+    statTotalNFTs:  'Total NFTs',
+    statSurahs:     'Surahs',
+    statPrice:      'ETH Price',
+    statCommunity:  'Community Share',
+    rarityHeading:  'Rarity Tiers',
+    rarityDesc:     "Fewer verses = fewer NFTs = higher rarity. The Quran's natural structure creates the perfect collectible system.",
+    thTier:         'Tier',
+    thVerses:       'Verses',
+    thSurahs:       'Surahs',
+    thNFTs:         'NFTs',
+    thSupply:       '% Supply',
+    tierLegendary:  'Legendary',
+    tierEpic:       'Epic',
+    tierRare:       'Rare',
+    tierUncommon:   'Uncommon',
+    tierCommon:     'Common',
+    footerRamadan:  'Ramadan Mubarak',
+    footerCollection: 'QURAN NFT COLLECTION -- 6,236 NFTs -- 114 SURAHS',
+    footerSymbol:   'Symbol: QURAN2030 \u00a0|\u00a0 Standard: ERC-404 \u00a0|\u00a0 Chain: Base',
+    langToggleBtn:  'العربية',
+    // Dynamic
+    msgNoMetaMask:      'MetaMask not detected. Please install MetaMask to mint.',
+    msgSwitchNetwork:   'Switching to Base network...',
+    msgAddNetwork:      'Please add and switch to Base network in your wallet.',
+    msgConnRejected:    'Connection rejected. Please try again.',
+    msgConnFailed:      'Failed to connect wallet. ',
+    msgWaiting:         'Waiting for transaction approval...',
+    msgSubmitted:       'Transaction submitted. Waiting for confirmation...',
+    msgViewEtherscan:   'View on Etherscan',
+    msgViewTx:          'View transaction on Etherscan',
+    msgMintOk1:         'Successfully minted ',
+    msgMintOk2:         ' NFT',
+    msgMintOkPlural:    's',
+    msgMintOk3:         '!',
+    msgTxRejected:      'Transaction was rejected.',
+    msgNoFunds:         'Insufficient ETH balance for this transaction.',
+    msgMintOff:         'Minting is not currently active.',
+    msgExceedsMax:      'Quantity exceeds maximum per transaction.',
+    msgSoldOut:         'Collection is sold out!',
+    msgUnknown:         'Unknown error occurred.',
+    msgRpcNote:         ' (This usually means the contract reverted or you have insufficient funds)',
+    msgMintFailed:      'Mint failed: ',
+    msgMinting:         'Minting...',
+    openMetaMask:       '📱 Open in MetaMask',
+  },
+  ar: {
+    viewCollInfo:   'معلومات المجموعة',
+    connectWallet:  'ربط المحفظة',
+    title:          'مجموعة القرآن NFT',
+    subtitle:       'إصدار رمضان ٢٠٣٠',
+    mintHeading:    'احصل على قرآن NFT',
+    mintPricePre:   'السعر لكل NFT:',
+    mintInactive:   'الإصدار غير نشط حالياً. يُرجى التحقق لاحقاً.',
+    mintDesc:       'كل صكّة تكشف سورة من القرآن الكريم — ندرتك يحددها القدر. آيات أقل تعني ندرة أعلى. هل ستحصل على سورة أسطورية من ٣ آيات أم سورة شائعة تتجاوز ٢٠٠ آية؟',
+    totalLabel:     'المجموع:',
+    mintBtn:        'صك',
+    mintedLabel:    'تم الإصدار',
+    balancePre:     'رصيدك:',
+    erc404badge:    'مدعوم بـ ERC-404',
+    aboutHeading:   'عن المجموعة',
+    aboutDesc:      'تُخلّد مجموعة قرآن NFT السور الـ١١٤ للقرآن الكريم على سلسلة Base. كل سورة تتجسد في NFT فريد يتضمن الأنماط الهندسية الإسلامية والخط العربي وتلاوة كاملة للإمام عبد الباسط عبد الصمد. عدد NFT لكل سورة يساوي عدد آياتها — القرآن نفسه يحدد الندرة.',
+    statTotalNFTs:  'إجمالي NFT',
+    statSurahs:     'السور',
+    statPrice:      'سعر ETH',
+    statCommunity:  'حصة المجتمع',
+    rarityHeading:  'مستويات الندرة',
+    rarityDesc:     'آيات أقل = NFT أقل = ندرة أعلى. البنية الطبيعية للقرآن تخلق نظام التجميع المثالي.',
+    thTier:         'المستوى',
+    thVerses:       'الآيات',
+    thSurahs:       'السور',
+    thNFTs:         'NFT',
+    thSupply:       '% الإمداد',
+    tierLegendary:  'أسطوري',
+    tierEpic:       'ملحمي',
+    tierRare:       'نادر',
+    tierUncommon:   'غير شائع',
+    tierCommon:     'شائع',
+    footerRamadan:  'رمضان مبارك',
+    footerCollection: 'مجموعة قرآن NFT · ٦٬٢٣٦ NFT · ١١٤ سورة',
+    footerSymbol:   'الرمز: QURAN2030 \u00a0|\u00a0 المعيار: ERC-404 \u00a0|\u00a0 السلسلة: Base',
+    langToggleBtn:  'English',
+    // Dynamic
+    msgNoMetaMask:      'لم يتم اكتشاف MetaMask. يُرجى تثبيته للصك.',
+    msgSwitchNetwork:   'جارٍ التبديل إلى شبكة Base...',
+    msgAddNetwork:      'يُرجى إضافة شبكة Base والتبديل إليها في محفظتك.',
+    msgConnRejected:    'تم رفض الاتصال. يُرجى المحاولة مرة أخرى.',
+    msgConnFailed:      'فشل الاتصال بالمحفظة. ',
+    msgWaiting:         'في انتظار الموافقة على المعاملة...',
+    msgSubmitted:       'تم إرسال المعاملة. في انتظار التأكيد...',
+    msgViewEtherscan:   'عرض على Etherscan',
+    msgViewTx:          'عرض المعاملة على Etherscan',
+    msgMintOk1:         'تم صك ',
+    msgMintOk2:         ' NFT',
+    msgMintOkPlural:    '',
+    msgMintOk3:         ' بنجاح!',
+    msgTxRejected:      'تم رفض المعاملة.',
+    msgNoFunds:         'رصيد ETH غير كافٍ لهذه المعاملة.',
+    msgMintOff:         'الإصدار غير نشط حالياً.',
+    msgExceedsMax:      'الكمية تتجاوز الحد الأقصى للمعاملة.',
+    msgSoldOut:         'نفدت المجموعة بالكامل!',
+    msgUnknown:         'حدث خطأ غير معروف.',
+    msgRpcNote:         ' (يعني هذا عادةً أن العقد رُفض أو رصيدك غير كافٍ)',
+    msgMintFailed:      'فشل الصك: ',
+    msgMinting:         'جارٍ الصك...',
+    openMetaMask:       '📱 افتح في MetaMask',
+  }
+};
+
+// =====================================================
+// LANGUAGE
+// =====================================================
+let currentLang = localStorage.getItem('quran_lang') || 'en';
+
+function t(key) {
+  return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) ||
+         TRANSLATIONS['en'][key] || key;
+}
+
+function applyTranslations() {
+  const isAr = currentLang === 'ar';
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+
+  // Toggle button label
+  document.getElementById('langToggle').textContent = t('langToggleBtn');
+
+  // All static data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+
+  // Wallet button — only update if not connected (it shows address when connected)
+  if (!userAddress) {
+    document.getElementById('walletBtn').textContent = t('connectWallet');
+  }
+
+  // Mint button — only update if not minting
+  if (!isMinting) {
+    document.getElementById('mintBtn').textContent = t('mintBtn');
+  }
+
+  // Mobile MetaMask link (if present)
+  const mmLink = document.getElementById('mmLink');
+  if (mmLink) mmLink.textContent = t('openMetaMask');
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  localStorage.setItem('quran_lang', currentLang);
+  applyTranslations();
+}
+
+// =====================================================
+// CONFIGURATION
+// =====================================================
+const CONTRACT_ADDRESS = "0x4d06DC6f0792711e93FF7adeE28b1B2c3CedFCAE";
 const EXPECTED_CHAIN_ID = 8453; // Base Mainnet
 const ETHERSCAN_BASE = "https://basescan.org";
 
-// Contract ABI (minimal)
 const CONTRACT_ABI = [
   "function mint(uint256 quantity) external payable",
   "function publicMinted() public view returns (uint256)",
@@ -986,7 +1017,7 @@ const CONTRACT_ABI = [
 ];
 
 const TOTAL_NFTS = 6236;
-const DEFAULT_MINT_PRICE = 0.03; // ETH fallback
+const DEFAULT_MINT_PRICE = 0.03;
 
 // =====================================================
 // STATE
@@ -996,7 +1027,7 @@ let signer = null;
 let contract = null;
 let userAddress = null;
 let quantity = 1;
-let mintPrice = null; // will be fetched from contract
+let mintPrice = null;
 let isMinting = false;
 
 // =====================================================
@@ -1024,23 +1055,21 @@ let isMinting = false;
 // =====================================================
 async function connectWallet() {
   if (userAddress) {
-    // Already connected - disconnect
     disconnectWallet();
     return;
   }
 
   if (typeof window.ethereum === 'undefined') {
-    showStatus('error', 'MetaMask not detected. Please install MetaMask to mint.');
+    showStatus('error', t('msgNoMetaMask'));
     return;
   }
 
   try {
     provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    // Check chain
     const network = await provider.getNetwork();
     if (network.chainId !== EXPECTED_CHAIN_ID) {
-      showStatus('pending', 'Switching to Base network...');
+      showStatus('pending', t('msgSwitchNetwork'));
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
@@ -1048,7 +1077,6 @@ async function connectWallet() {
         });
         provider = new ethers.providers.Web3Provider(window.ethereum);
       } catch (switchError) {
-        // If chain not added, add it
         try {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
@@ -1062,51 +1090,41 @@ async function connectWallet() {
           });
           provider = new ethers.providers.Web3Provider(window.ethereum);
         } catch (addError) {
-          showStatus('error', 'Please add and switch to Base network in your wallet.');
+          showStatus('error', t('msgAddNetwork'));
           return;
         }
       }
     }
 
-    // Request accounts
     await provider.send("eth_requestAccounts", []);
     signer = provider.getSigner();
     userAddress = await signer.getAddress();
-
-    // Initialize contract
     contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
-    // Update UI
     const truncated = userAddress.slice(0, 6) + '...' + userAddress.slice(-4);
     const walletBtn = document.getElementById('walletBtn');
     walletBtn.textContent = truncated;
     walletBtn.classList.add('connected');
 
     document.getElementById('mintBtn').disabled = false;
-
     hideStatus();
-
-    // Fetch on-chain data
     await refreshContractData();
 
   } catch (err) {
     console.error('Connection error:', err);
     if (err.code === 4001) {
-      showStatus('error', 'Connection rejected. Please try again.');
+      showStatus('error', t('msgConnRejected'));
     } else {
-      showStatus('error', 'Failed to connect wallet. ' + (err.message || ''));
+      showStatus('error', t('msgConnFailed') + (err.message || ''));
     }
   }
 }
 
 function disconnectWallet() {
-  provider = null;
-  signer = null;
-  contract = null;
-  userAddress = null;
+  provider = null; signer = null; contract = null; userAddress = null;
 
   const walletBtn = document.getElementById('walletBtn');
-  walletBtn.textContent = 'Connect Wallet';
+  walletBtn.textContent = t('connectWallet');
   walletBtn.classList.remove('connected');
 
   document.getElementById('mintBtn').disabled = true;
@@ -1121,32 +1139,23 @@ async function refreshContractData() {
   if (!contract) return;
 
   try {
-    // Fetch minted count
     let mintedCount = 0;
     try {
       mintedCount = Number(await contract.publicMinted());
     } catch (e) {
-      // Fallback to totalSupply if minted() not available
-      try {
-        mintedCount = Number(await contract.totalSupply());
-      } catch (e2) {
-        console.warn('Could not fetch supply count');
-      }
+      try { mintedCount = Number(await contract.totalSupply()); } catch (e2) {}
     }
     updateSupplyDisplay(mintedCount);
 
-    // Fetch mint price
     try {
       const price = await contract.MINT_PRICE();
       mintPrice = price;
       updateTotalPrice();
     } catch (e) {
-      console.warn('Using default mint price');
       mintPrice = ethers.utils.parseEther(DEFAULT_MINT_PRICE.toString());
       updateTotalPrice();
     }
 
-    // Fetch mint active status
     try {
       const active = await contract.mintActive();
       if (!active) {
@@ -1156,20 +1165,15 @@ async function refreshContractData() {
         document.getElementById('mintInactiveBanner').classList.remove('visible');
         if (userAddress) document.getElementById('mintBtn').disabled = false;
       }
-    } catch (e) {
-      console.warn('Could not check mint status');
-    }
+    } catch (e) {}
 
-    // Fetch user balance
     if (userAddress) {
       try {
         const balanceWei = await contract.balanceOf(userAddress);
         const nftCount = balanceWei.div(ethers.constants.WeiPerEther).toNumber();
         document.getElementById('balanceCount').textContent = nftCount;
         document.getElementById('yourBalance').classList.add('visible');
-      } catch (e) {
-        console.warn('Could not fetch balance');
-      }
+      } catch (e) {}
     }
 
   } catch (err) {
@@ -1179,8 +1183,7 @@ async function refreshContractData() {
 
 function updateSupplyDisplay(minted) {
   document.getElementById('mintedCount').textContent = minted.toLocaleString();
-  const pct = (minted / TOTAL_NFTS) * 100;
-  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressBar').style.width = (minted / TOTAL_NFTS * 100) + '%';
 }
 
 // =====================================================
@@ -1193,12 +1196,9 @@ function changeQty(delta) {
 }
 
 function updateTotalPrice() {
-  let priceEth;
-  if (mintPrice) {
-    priceEth = parseFloat(ethers.utils.formatEther(mintPrice));
-  } else {
-    priceEth = DEFAULT_MINT_PRICE;
-  }
+  const priceEth = mintPrice
+    ? parseFloat(ethers.utils.formatEther(mintPrice))
+    : DEFAULT_MINT_PRICE;
   const total = (priceEth * quantity).toFixed(4).replace(/\.?0+$/, '');
   document.getElementById('totalPrice').textContent = total + ' ETH';
 }
@@ -1213,61 +1213,58 @@ async function mintNFT() {
   const mintBtn = document.getElementById('mintBtn');
   mintBtn.classList.add('minting');
   mintBtn.disabled = true;
-  mintBtn.innerHTML = '<span class="spinner"></span>Minting...';
+  mintBtn.innerHTML = '<span class="spinner"></span>' + t('msgMinting');
 
   try {
-    // Calculate total value
-    let value;
-    if (mintPrice) {
-      value = mintPrice.mul(quantity);
-    } else {
-      value = ethers.utils.parseEther((DEFAULT_MINT_PRICE * quantity).toString());
-    }
+    const value = mintPrice
+      ? mintPrice.mul(quantity)
+      : ethers.utils.parseEther((DEFAULT_MINT_PRICE * quantity).toString());
 
-    showStatus('pending', '<span class="spinner"></span> Waiting for transaction approval...');
+    showStatus('pending', '<span class="spinner"></span> ' + t('msgWaiting'));
 
-    // Send mint transaction
     const tx = await contract.mint(quantity, { value: value });
 
-    showStatus('pending', '<span class="spinner"></span> Transaction submitted. Waiting for confirmation...<br><a href="' + ETHERSCAN_BASE + '/tx/' + tx.hash + '" target="_blank" rel="noopener">View on Etherscan</a>');
+    showStatus('pending',
+      '<span class="spinner"></span> ' + t('msgSubmitted') +
+      '<br><a href="' + ETHERSCAN_BASE + '/tx/' + tx.hash + '" target="_blank" rel="noopener">' +
+      t('msgViewEtherscan') + '</a>'
+    );
 
-    // Wait for confirmation
     const receipt = await tx.wait();
 
-    showStatus('success', 'Successfully minted ' + quantity + ' NFT' + (quantity > 1 ? 's' : '') + '!<br><a href="' + ETHERSCAN_BASE + '/tx/' + receipt.hash + '" target="_blank" rel="noopener">View transaction on Etherscan</a>');
+    showStatus('success',
+      t('msgMintOk1') + quantity + t('msgMintOk2') +
+      (quantity > 1 ? t('msgMintOkPlural') : '') + t('msgMintOk3') +
+      '<br><a href="' + ETHERSCAN_BASE + '/tx/' + receipt.hash + '" target="_blank" rel="noopener">' +
+      t('msgViewTx') + '</a>'
+    );
 
-    // Refresh data
     await refreshContractData();
 
   } catch (err) {
     console.error('Mint error:', err);
 
     if (err.code === 'ACTION_REJECTED' || err.code === 4001) {
-      showStatus('error', 'Transaction was rejected.');
+      showStatus('error', t('msgTxRejected'));
     } else if (err.message && err.message.includes('insufficient funds')) {
-      showStatus('error', 'Insufficient ETH balance for this transaction.');
+      showStatus('error', t('msgNoFunds'));
     } else if (err.message && err.message.includes('Mint not active')) {
-      showStatus('error', 'Minting is not currently active.');
+      showStatus('error', t('msgMintOff'));
     } else if (err.message && err.message.includes('Exceeds max')) {
-      showStatus('error', 'Quantity exceeds maximum per transaction.');
+      showStatus('error', t('msgExceedsMax'));
     } else if (err.message && err.message.includes('Sold out')) {
-      showStatus('error', 'Collection is sold out!');
+      showStatus('error', t('msgSoldOut'));
     } else {
-      let reason = err.reason || err.message || 'Unknown error occurred.';
+      let reason = err.reason || err.message || t('msgUnknown');
       if (err.data && err.data.message) reason = err.data.message;
       if (err.error && err.error.message) reason = err.error.message;
-      
-      // Specifically handle the JSON-RPC error with more detail
-      if (reason.includes("Internal JSON-RPC error")) {
-        reason += " (This usually means the contract reverted or you have insufficient funds)";
-      }
-      
-      showStatus('error', 'Mint failed: ' + reason);
+      if (reason.includes('Internal JSON-RPC error')) reason += t('msgRpcNote');
+      showStatus('error', t('msgMintFailed') + reason);
     }
   } finally {
     isMinting = false;
     mintBtn.classList.remove('minting');
-    mintBtn.innerHTML = 'MINT';
+    mintBtn.textContent = t('mintBtn');
     if (userAddress) mintBtn.disabled = false;
   }
 }
@@ -1288,27 +1285,33 @@ function hideStatus() {
 }
 
 // =====================================================
-// ACCOUNT & CHAIN CHANGE LISTENERS
+// ACCOUNT & CHAIN LISTENERS
 // =====================================================
 if (typeof window.ethereum !== 'undefined') {
   window.ethereum.on('accountsChanged', function(accounts) {
-    if (accounts.length === 0) {
-      disconnectWallet();
-    } else {
-      // Reconnect with new account
-      disconnectWallet();
-      connectWallet();
-    }
+    if (accounts.length === 0) disconnectWallet();
+    else { disconnectWallet(); connectWallet(); }
   });
-
-  window.ethereum.on('chainChanged', function() {
-    // Reload on chain change
-    window.location.reload();
-  });
+  window.ethereum.on('chainChanged', function() { window.location.reload(); });
 }
 
-// Initialize total price display
+// =====================================================
+// MOBILE METAMASK DEEP LINK
+// =====================================================
+if (/Mobi|Android|iPhone/i.test(navigator.userAgent) && !window.ethereum) {
+  const btn = document.createElement('a');
+  btn.id = 'mmLink';
+  btn.href = 'https://metamask.app.link/dapp/criptografia-cash.github.io/ramadan2030/';
+  btn.textContent = t('openMetaMask');
+  btn.style = 'display:block;margin-top:8px;font-size:12px;color:#D4A843;text-align:right;text-decoration:none;';
+  document.getElementById('walletBtn').insertAdjacentElement('afterend', btn);
+}
+
+// =====================================================
+// INIT
+// =====================================================
 updateTotalPrice();
+applyTranslations();
   </script>
 </body>
 
